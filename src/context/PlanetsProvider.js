@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 import PlanetsContext from './PlanetsContext';
 
@@ -10,12 +9,10 @@ function PlanetsProvider({ children }) {
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
   ]);
   const [filtersList, setFiltersList] = useState({
-    filters: {
-      filterByName: {
-        name: '',
-      },
-      filterByNumericValues: [],
-    },
+    filterByName: '',
+    filterByNumericValues: [
+      'opa', 'funcionou',
+    ],
   });
 
   function fetchPlanets() {
@@ -27,10 +24,13 @@ function PlanetsProvider({ children }) {
         }));
   }
 
-  function filterByName(searchValue) {
-    setToShowPlanetsList(allPlanetsList.filter((planet) => (
-      planet.name.toLowerCase().includes(searchValue.toLowerCase())
-    )));
+  function filterPlanets() {
+    setToShowPlanetsList(
+      allPlanetsList.filter((planet) => (
+        planet.name.toLowerCase()
+          .includes(filtersList.filterByName.toLowerCase())
+      ))
+    );
   }
 
   const contextValue = {
@@ -39,8 +39,8 @@ function PlanetsProvider({ children }) {
     filtersList,
     columnsList,
     fetchPlanets,
+    filterPlanets,
     setFiltersList,
-    filterByName,
     setColumnsList,
     setToShowPlanetsList,
   };
@@ -53,9 +53,5 @@ function PlanetsProvider({ children }) {
     </PlanetsContext.Provider>
   );
 }
-
-PlanetsProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export default PlanetsProvider;
