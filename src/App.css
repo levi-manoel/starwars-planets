@@ -4,11 +4,13 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url('https://i.imgur.com/vZw5Z5V.jpg');
+  background-size: cover;
+}
+
 .app__body {
   display: flex;
   flex-flow: column wrap;
-  background-image: url('https://i.imgur.com/vZw5Z5V.jpg');
-  background-size: cover;
-  background-attachment: fixed;
   min-height: 1vh;
 }
